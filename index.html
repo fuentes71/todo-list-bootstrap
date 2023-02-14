@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Todo List - Bootstrap</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css" />
+  <link rel="stylesheet" href="./css/style.css" />
+</head>
+
+<body>
+  <div>
+    <button type="button" id="user-icon" class="btn float-button sticky-sm-bottom position-fixed i-user pe-auto " data-bs-toggle="modal" data-bs-target="#login-todo-modal" data-bs-whatever="@mdo"><i class="bi bi-person-fill-exclamation text-danger"></i></button>
+
+  </div>
+  <div class="container">
+    <div class="row my-8">
+      <div class="col">
+        <div class="card " style="margin-top: 5rem !important;">
+          <ul class="list-group list-group-flush" id="list-todo"></ul>
+        </div>
+      </div>
+    </div>
+
+    <button type="button" id="button-create" class="btn btn-secondary position-fixed float-button" data-bs-toggle="modal" onclick="loginTrue()">
+      <i class="bi bi-plus-lg"></i>
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="create-todo-modal" tabindex="-1" aria-labelledby="create-todo-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="create-todo-modal-label">
+            Criar um novo To Do
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Descrição do To Do" id="text-todo" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Descrição do To Do</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-info" onclick="createTodo()">
+            Criar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal DELETE -->
+  <div class="modal fade" id="delete-todo-modal" tabindex="-1" aria-labelledby="delete-todo-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="delete-todo-modal-label">
+            Deseja realmente excluir o item?
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close">
+            Não
+          </button>
+          <button id="delete-button" type="button" class="btn btn-info" data-id="" onclick="confirmDelete(this)">
+            Sim
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal EDIT -->
+  <div class="modal fade" id="edit-todo-modal" tabindex="-1" aria-labelledby="edit-todo-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="create-todo-modal-label">
+            Editar To Do
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="form-floating">
+            <textarea class="form-control" placeholder="Descrição do To Do" id="edit-todo" style="height: 100px"></textarea>
+            <label for="floatingTextarea2">Descrição do novo ToDo</label>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" id="edit-button" class="btn btn-info" data-id="" onclick="confirmEdit(this)">
+            Editar
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal Login -->
+  <div class="modal fade" id="login-todo-modal" tabindex="-1" aria-labelledby="loginTodoModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="login" class="col-form-label">Login:</label>
+              <input type="text" class="form-control" id="login">
+            </div>
+            <div class="mb-3 ">
+              <label for="password" class="col-form-label">Senha:</label>
+              <div class="position-relative">
+                <input type="password" class="form-control " id="password">
+                <div class="eye fs-4">
+
+                  <i id="button-password" class="bi bi-eye"></i>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center ">
+                <p>Não tem conta? <input type="button" class=" btn text-info" value="Cadastre-se" onclick="createUser()"></p>
+              </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" onclick="loginUser()" id="button-login" class="btn btn-primary">Logar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal cadastrar -->
+  <div class="modal fade" id="create-user-todo-modal" tabindex="-1" aria-labelledby="createUserTodoModal" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form>
+            <div class="mb-3">
+              <label for="createEmail" class="col-form-label">E-mail:</label>
+              <input type="email" class="form-control" id="createEmail">
+            </div>
+            <div class="mb-3">
+              <label for="createPassword" class="col-form-label">Senha:</label>
+              <input type="password" class="form-control" id="createPassword">
+            </div>
+            <div class="mb-3 position-relative">
+              <label for="createRepeatPassword" class="col-form-label">Repetir Senha:</label>
+              <input type="password" class="form-control" id="createRepeatPassword">
+              <div class="eye">
+                <button class="btn">
+                  <i class="bi bi-eye"></i>
+                </button>
+              </div>
+            </div>
+            <div class="d-flex justify-content-center ">
+              <p>Não tem conta? <button class="btn btn-link" onclick="createUser()">Cadastre-se</button></p>
+            </div>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-primary">Logar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal EXIT -->
+  <div class="modal fade" id="exit-todo-modal" tabindex="-1" aria-labelledby="exit-todo-modal-label" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="delete-todo-modal-label">
+            Deseja desconectar da conta?
+          </h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-info" data-bs-dismiss="modal" aria-label="Close">
+            Não
+          </button>
+          <button type="button" class="btn btn-info" onclick="userExit()">
+            Sim
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Toast -->
+  <div class="toast align-items-center border-0 position-fixed feedback-toast" role="alert" tabindex="-2" aria-live="assertive" aria-atomic="true" id="feedback-toast">
+    <div class="d-flex">
+      <div class="toast-body"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js" integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD" crossorigin="anonymous"></script>
+  <script src="./js/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,66 @@
+.float-button {
+  bottom: 50px;
+  right: 50px;
+  padding: 0 !important;
+  height: 50px;
+  width: 50px;
+  font-size: 30px;
+  border-radius: 50%;
+}
+.i-user {
+  top: 20px;
+}
+.btn {
+  cursor: pointer !important;
+}
+.feedback-toast {
+  right: 50px;
+  top: 50px;
+  z-index: 99999;
+}
+
+.icon-delete:hover {
+  color: brown;
+}
+
+.icon-edit:hover {
+  color: yellowgreen;
+}
+.note {
+  word-break: break-all;
+  padding: 0 20px;
+}
+
+.content-buttons {
+  display: flex;
+  flex-direction: row;
+}
+
+.line-through {
+  text-decoration: line-through;
+}
+.eye {
+  position: absolute;
+  top: 0px;
+  right: 10px;
+  text-align: center;
+}
+body {
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(45deg, #89fffd, #56ccf2, #2f80ed);
+  background-size: 300% 300%;
+  animation: colors 15s ease infinite;
+}
+
+@keyframes colors {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
