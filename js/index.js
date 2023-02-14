@@ -13,9 +13,10 @@ function generateID() {
   return id;
 }
 //UTIL FUNCTIONS
-const userLogin = getLocalStorage("userLogin") || false;
+const listaUser = getLocalStorage("listaUser") || [];
 const data = getLocalStorage("todo") || [];
 const confirmDeleteValue = false;
+const userLogin = getLocalStorage("userLogin") || false;
 
 const textTodo = document.getElementById("text-todo");
 const _editTodo = document.getElementById("edit-todo");
@@ -28,7 +29,11 @@ const feedBackToastEl = document.getElementById("feedback-toast");
 const listTodo = document.getElementById("list-todo");
 const login = document.getElementById("login");
 const password = document.getElementById("password");
+const createEmail = document.getElementById("createEmail");
+const createpassword = document.getElementById("createPassword");
+const createRepeatPassword = document.getElementById("createRepeatPassword");
 const buttonPassword = document.getElementById("button-password");
+const buttonCreatePassword = document.getElementById("button-create-password");
 
 const createTodoModal = new bootstrap.Modal("#create-todo-modal");
 const loginTodoModal = new bootstrap.Modal("#login-todo-modal");
@@ -39,7 +44,7 @@ const editTodoModal = new bootstrap.Modal("#edit-todo-modal");
 const feedBackToast = new bootstrap.Toast(feedBackToastEl);
 
 buttonCreate.addEventListener("click", () => {
-  if (!userLogin) {
+  if (userLogin == false) {
     showFeedback(false, "Conecte-se para criar Todo");
     loginTrue();
   }
@@ -53,29 +58,42 @@ buttonPassword.addEventListener("click", () => {
     password.setAttribute("type", "password");
   }
 });
+buttonCreatePassword.addEventListener("click", () => {
+  if (buttonCreatePassword.classList.contains("bi-eye")) {
+    buttonCreatePassword.setAttribute("class", "bi bi-eye-slash");
+    createpassword.setAttribute("type", "text");
+    createRepeatPassword.setAttribute("type", "text");
+  } else {
+    buttonCreatePassword.setAttribute("class", "bi bi-eye");
+    createpassword.setAttribute("type", "password");
+    createRepeatPassword.setAttribute("type", "password");
+  }
+});
 function userExit() {
-  saveLocalStorage("userLogin", false);
-  saveLocalStorage("todo", []);
+  listaUser.forEach((user) => {
+    if (user.email === userLogin.email) {
+      user.todo = userLogin.todo;
+      saveLocalStorage("listaUser", listaUser);
+    }
+  });
+  localStorage.removeItem("todo");
+  localStorage.removeItem("userLogin");
   loginTrue();
   exitUserTodoModal.hide();
 }
 function loginTrue() {
-  if (userLogin) {
+  if (userLogin != false) {
     buttonCreate.setAttribute("data-bs-target", "#create-todo-modal");
     userIcon.children[0].setAttribute("class", "bi bi-person text-white ");
     userIcon.setAttribute("data-bs-target", "#exit-todo-modal");
-    buttonCreate.removeAttribute("class", "btn-secondary");
+
     buttonCreate.setAttribute(
       "class",
       "btn btn-info position-fixed float-button"
     );
   } else {
+    showFeedback(false, "Conecte-se para cadastrar");
     buttonCreate.removeAttribute("data-bs-target", "#create-todo-modal");
-    buttonCreate.removeAttribute(
-      "class",
-      "btn btn-info position-fixed float-button"
-    );
-
     buttonCreate.setAttribute(
       "class",
       "btn position-fixed float-button btn-secondary"
@@ -235,19 +253,53 @@ function renderFirst() {
 }
 
 function loginUser() {
-  saveLocalStorage("userLogin", true);
-  getLocalStorage("userLogin");
-  loginTrue();
-  loginTodoModal.hide();
+  buttonPassword.setAttribute("class", "bi bi-eye");
+  password.setAttribute("type", "password");
+  if (!login.value || !password.value) {
+    return showFeedback(false, "Preencha corretamente todos os campos!");
+  }
+  listaUser.forEach((user) => {
+    if (user.email == login.value && user.password == password.value) {
+      showFeedback(true, "logado");
+      userLogin.push({ email: user.email, todo: [] });
+      saveLocalStorage("userLogin", userLogin);
+      loginTrue();
+      loginTodoModal.hide();
+      login.value = "";
+      password.value = "";
+    } else {
+      return showFeedback(false, "E-mail ou senha invalidos!");
+    }
+  });
 }
-function createUser() {
+function createModalUser() {
+  buttonCreatePassword.setAttribute("class", "bi bi-eye");
+  createpassword.setAttribute("type", "password");
+  createRepeatPassword.setAttribute("type", "password");
   loginTodoModal.hide();
   createUserTodoModal.show();
 }
 
+function createUser() {
+  const valid = listaUser.some((user) => user.email === createEmail.value);
+  if (valid) {
+    return showFeedback(false, "E-mail já existente. Tente outro e-mail!");
+  }
+  if (validate.email && validate.password && validate.repeatPassword) {
+    listaUser.push({
+      email: createEmail.value,
+      password: createpassword.value,
+      todo: [],
+    });
+    saveLocalStorage("listaUser", listaUser);
+  } else {
+    return showFeedback(false, "Preencha corretamente todos os campos!");
+  }
+}
+
 setTimeout(() => {
   renderFirst();
-  // if (!userLogin) {
-  //   loginTodoModal.show();
-  // }
+  if (!userLogin) {
+    loginTodoModal.show();
+  }
 });

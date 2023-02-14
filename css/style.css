@@ -50,7 +50,7 @@ body {
   height: 100vh;
   background: linear-gradient(45deg, #89fffd, #56ccf2, #2f80ed);
   background-size: 300% 300%;
-  animation: colors 15s ease infinite;
+  animation: colors 5s ease infinite;
 }
 
 @keyframes colors {

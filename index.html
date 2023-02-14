@@ -102,7 +102,7 @@
   </div>
 
 
-  <!-- Modal Login -->
+  <!-- Modal LOGIN -->
   <div class="modal fade" id="login-todo-modal" tabindex="-1" aria-labelledby="loginTodoModal" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
@@ -119,15 +119,17 @@
             <div class="mb-3 ">
               <label for="password" class="col-form-label">Senha:</label>
               <div class="position-relative">
+
                 <input type="password" class="form-control " id="password">
                 <div class="eye fs-4">
-
                   <i id="button-password" class="bi bi-eye"></i>
                 </div>
               </div>
               <div class="d-flex justify-content-center ">
-                <p>Não tem conta? <input type="button" class=" btn text-info" value="Cadastre-se" onclick="createUser()"></p>
+                <p>Não tem conta? <input type="button" class=" btn text-info" value="Cadastre-se" onclick="createModalUser()"></p>
               </div>
+            </div>
+
           </form>
         </div>
         <div class="modal-footer">
@@ -142,7 +144,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
         <div class="modal-header">
-          <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+          <h1 class="modal-title fs-5" id="exampleModalLabel">Cadastro</h1>
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
@@ -153,24 +155,22 @@
             </div>
             <div class="mb-3">
               <label for="createPassword" class="col-form-label">Senha:</label>
-              <input type="password" class="form-control" id="createPassword">
-            </div>
-            <div class="mb-3 position-relative">
-              <label for="createRepeatPassword" class="col-form-label">Repetir Senha:</label>
-              <input type="password" class="form-control" id="createRepeatPassword">
-              <div class="eye">
-                <button class="btn">
-                  <i class="bi bi-eye"></i>
-                </button>
+              <div class=" fs-4 position-relative">
+                <input type="password" class="form-control" id="createPassword">
+                <div class="eye">
+                  <i id="button-create-password" class="bi bi-eye"></i>
+                </div>
               </div>
             </div>
-            <div class="d-flex justify-content-center ">
-              <p>Não tem conta? <button class="btn btn-link" onclick="createUser()">Cadastre-se</button></p>
+            <div class="mb-3 ">
+              <label for="createRepeatPassword" class="col-form-label">Repetir Senha:</label>
+              <input type="password" class="form-control" id="createRepeatPassword">
+
             </div>
           </form>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary">Logar</button>
+          <button type="button" onclick="createUser()" class="btn btn-primary">Cadastrar</button>
         </div>
       </div>
     </div>
