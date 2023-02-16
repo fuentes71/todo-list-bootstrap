@@ -8,11 +8,9 @@
   border-radius: 50%;
 }
 .i-user {
-  top: 20px;
+  top: 10px;
 }
-.btn {
-  cursor: pointer !important;
-}
+
 .feedback-toast {
   right: 50px;
   top: 50px;
@@ -25,6 +23,13 @@
 
 .icon-edit:hover {
   color: yellowgreen;
+}
+.bi-clipboard2:hover,
+.bi-clipboard2-check:hover {
+  color: white;
+}
+.icon {
+  color: #ffffff50;
 }
 .note {
   word-break: break-all;
@@ -41,16 +46,61 @@
 }
 .eye {
   position: absolute;
-  top: 0px;
+  top: 5px;
   right: 10px;
   text-align: center;
+  cursor: pointer;
 }
-body {
+.bg-loader {
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  background-color: #00000095;
   width: 100vw;
   height: 100vh;
-  background: linear-gradient(45deg, #89fffd, #56ccf2, #2f80ed);
-  background-size: 300% 300%;
-  animation: colors 5s ease infinite;
+  z-index: 99999;
+}
+.loader {
+  display: block;
+  animation: is-rotating 1s infinite;
+  border: 6px solid #e5e5e5;
+  border-radius: 50%;
+  border-top-color: #51d4db;
+  height: 50px;
+  width: 50px;
+}
+.btn-gradient:hover {
+  background: #6a11cb;
+
+  background: -webkit-linear-gradient(
+    to right,
+    rgba(106, 17, 203, 1),
+    rgba(37, 117, 252, 1)
+  );
+  background: linear-gradient(
+    to right,
+    rgba(106, 17, 203, 1),
+    rgba(37, 117, 252, 1)
+  );
+  background-size: 350% 350%;
+  animation: colors 15s ease infinite;
+}
+.gradient-custom {
+  background: #6a11cb;
+
+  background: -webkit-linear-gradient(
+    to right,
+    rgba(106, 17, 203, 1),
+    rgba(37, 117, 252, 1)
+  );
+  background: linear-gradient(
+    to right,
+    rgba(106, 17, 203, 1),
+    rgba(37, 117, 252, 1)
+  );
+  background-size: 350% 350%;
+  animation: colors 15s ease infinite;
 }
 
 @keyframes colors {
@@ -62,5 +112,11 @@ body {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+@keyframes is-rotating {
+  to {
+    transform: rotate(1turn);
   }
 }
