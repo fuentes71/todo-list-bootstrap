@@ -52,7 +52,7 @@
   cursor: pointer;
 }
 .bg-loader {
-  display: none;
+  display: none !important;
   justify-content: center;
   align-items: center;
   position: absolute;
@@ -71,7 +71,7 @@
   width: 50px;
 }
 .btn-gradient:hover {
-  background: #6a11cb;
+  background: #6a11cb !important;
 
   background: -webkit-linear-gradient(
     to right,
@@ -87,7 +87,7 @@
   animation: colors 15s ease infinite;
 }
 .gradient-custom {
-  background: #6a11cb;
+  background: #6a11cb !important;
 
   background: -webkit-linear-gradient(
     to right,

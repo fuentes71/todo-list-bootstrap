@@ -36,7 +36,7 @@ const feedBackToast = new bootstrap.Toast(feedBackToastEl);
 function userExit() {
   atualizaUsuario();
   localStorage.removeItem("userLogin");
-  loader.setAttribute("style", "display: flex");
+  loader.setAttribute("style", "display: flex !important");
   setTimeout(() => {
     window.location.href = "../login/login.html";
   }, 1000);

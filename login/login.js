@@ -48,7 +48,7 @@ function login() {
     password.value == userValido.password
   ) {
     saveLocalStorage("userLogin", userValido);
-    loader.setAttribute("style", "display: flex");
+    loader.setAttribute("style", "display: flex !important");
     setTimeout(() => {
       window.location.href = "../todo/todo.html";
     }, 2200);

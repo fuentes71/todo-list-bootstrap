@@ -59,7 +59,7 @@ function createUser() {
       todo: [],
     });
     saveLocalStorage("listaUser", listaUser);
-    loader.setAttribute("style", "display: flex");
+    loader.setAttribute("style", "display: flex !important");
     setTimeout(() => {
       window.location.href = "../login/login.html";
     }, 1700);
