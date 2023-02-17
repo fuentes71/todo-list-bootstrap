@@ -75,6 +75,7 @@ function checkTodo(element) {
     document.getElementById(id).classList.remove("line-through");
     element.innerHTML = `<i class="bi icon bi-clipboard2 fs-3"></i>`;
   }
+  saveLocalStorage("userLogin", userLogin);
 }
 
 function deleteTodo(element) {
@@ -105,6 +106,7 @@ function confirmEdit(element) {
     msg = "To Do editado com sucesso!";
     _editTodo.value = "";
   }
+
   saveLocalStorage("userLogin", userLogin);
   showFeedback(sucess, msg);
 }
@@ -118,7 +120,8 @@ function confirmDelete(element) {
   document.getElementById(id).remove();
   userLogin.todo.splice(index, 1);
 
-  saveLocalStorage("todo", data);
+  saveLocalStorage("userLogin", userLogin);
+  showFeedback(true, "Item deletado com sucesso!");
 }
 
 function addTodo(todo) {
@@ -154,6 +157,9 @@ function addTodo(todo) {
       </div>
     </li>
   `;
+  if (todo.done) {
+    document.getElementById(todo.id).classList.add("line-through");
+  }
 }
 
 function createTodo() {

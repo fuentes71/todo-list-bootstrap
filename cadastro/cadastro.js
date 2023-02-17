@@ -14,7 +14,16 @@ const feedBackToastEl = document.getElementById("feedback-toast");
 const loader = document.querySelector(".bg-loader");
 
 const listaUser = getLocalStorage("listaUser") || [];
+
 const validate = { email: false, password: false, repeatPassword: false };
+const validateEmail = (email) => {
+  return email.match(
+    /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+  );
+};
+const validatePassword = (password) => {
+  return password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
+};
 
 const feedBackToast = new bootstrap.Toast(feedBackToastEl);
 
@@ -31,16 +40,16 @@ iconEye.addEventListener("click", () => {
 });
 
 email.addEventListener("keydown", () => {
-  if (email.value) validate.email = true;
+  if (validateEmail(email.value)) validate.email = true;
   else validate.email = false;
 });
 password.addEventListener("keydown", () => {
-  if (password.value) validate.password = true;
+  if (validatePassword(password.value)) validate.password = true;
   else validate.password = false;
 });
-repeatPassword.addEventListener("keydown", () => {
-  if (repeatPassword.value) validate.repeatPassword = true;
-  else validate.repeatPassword = false;
+repeatPassword.addEventListener("keyup", () => {
+  if (repeatPassword.value != password.value) validate.repeatPassword = false;
+  else validate.repeatPassword = true;
 });
 
 function createUser() {
@@ -48,11 +57,10 @@ function createUser() {
   if (valid) {
     return showFeedback(false, "E-mail já existente. Tente outro e-mail!");
   }
-  if (validate.email && validate.password && validate.repeatPassword) {
-    if (password.value != repeatPassword.value) {
-      password.focus();
-      return showFeedback(false, "As senhas são diferentes!");
-    }
+  if (!validate.email) showFeedback(false, "Informe um email valido");
+  else if (!validate.password) showFeedback(false, "Digite uma senha valida!");
+  else if (!validate.repeatPassword) showFeedback(false, "Senhas diferentes!");
+  else {
     listaUser.push({
       email: email.value,
       password: password.value,
@@ -64,9 +72,6 @@ function createUser() {
       window.location.href = "../login/login.html";
     }, 1700);
     return showFeedback(true, "Usuario cadastrado com sucesso");
-  } else {
-    email.focus();
-    return showFeedback(false, "Preencha corretamente todos os campos!");
   }
 }
 

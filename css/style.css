@@ -1,6 +1,6 @@
 .float-button {
-  bottom: 50px;
-  right: 50px;
+  bottom: 1.5rem;
+  right: 1.5rem;
   padding: 0 !important;
   height: 50px;
   width: 50px;
@@ -9,10 +9,11 @@
 }
 .i-user {
   top: 10px;
+  right: 1.5rem;
 }
 
 .feedback-toast {
-  right: 50px;
+  right: 1rem;
   top: 50px;
   z-index: 99999;
 }
@@ -77,14 +78,15 @@
     to right,
     rgba(106, 17, 203, 1),
     rgba(37, 117, 252, 1)
-  );
+  ) !important;
   background: linear-gradient(
     to right,
     rgba(106, 17, 203, 1),
     rgba(37, 117, 252, 1)
-  );
-  background-size: 350% 350%;
-  animation: colors 15s ease infinite;
+  ) !important;
+  background-size: 350% 350% !important;
+  animation: colors 15s ease infinite !important
+;
 }
 .gradient-custom {
   background: #6a11cb !important;
@@ -93,14 +95,15 @@
     to right,
     rgba(106, 17, 203, 1),
     rgba(37, 117, 252, 1)
-  );
+  ) !important;
   background: linear-gradient(
     to right,
     rgba(106, 17, 203, 1),
     rgba(37, 117, 252, 1)
-  );
-  background-size: 350% 350%;
-  animation: colors 15s ease infinite;
+  ) !important;
+  background-size: 350% 350% !important;
+  animation: colors 15s ease infinite !important
+;
 }
 
 @keyframes colors {
@@ -118,5 +121,15 @@
 @keyframes is-rotating {
   to {
     transform: rotate(1turn);
+  }
+}
+
+@media (min-width: 450px) {
+  .float-button {
+    bottom: 3rem;
+    right: 3rem;
+  }
+  .i-user {
+    right: 3rem;
   }
 }
