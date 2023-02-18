@@ -9,6 +9,7 @@ const email = document.getElementById("typeEmailX");
 const password = document.getElementById("typePasswordX");
 const repeatPassword = document.getElementById("typeRepeatPasswordX");
 const iconEye = document.getElementById("icon-eye");
+const error = document.getElementById("error");
 const feedBackToastEl = document.getElementById("feedback-toast");
 
 const loader = document.querySelector(".bg-loader");
@@ -51,15 +52,20 @@ repeatPassword.addEventListener("keyup", () => {
   if (repeatPassword.value != password.value) validate.repeatPassword = false;
   else validate.repeatPassword = true;
 });
-
+function errorInput(_error) {
+  error.innerHTML = _error;
+  setTimeout(() => {
+    error.innerHTML = "";
+  }, 2000);
+}
 function createUser() {
   const valid = listaUser.some((user) => user.email === email.value);
   if (valid) {
     return showFeedback(false, "E-mail já existente. Tente outro e-mail!");
   }
-  if (!validate.email) showFeedback(false, "Informe um email valido");
-  else if (!validate.password) showFeedback(false, "Digite uma senha valida!");
-  else if (!validate.repeatPassword) showFeedback(false, "Senhas diferentes!");
+  if (!validate.email) errorInput("Informe um email valido");
+  else if (!validate.password) errorInput("Digite uma senha valida!");
+  else if (!validate.repeatPassword) errorInput("Senhas diferentes!");
   else {
     listaUser.push({
       email: email.value,

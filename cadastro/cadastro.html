@@ -16,7 +16,7 @@
     <div class="loader"></div>
   </div>
   <section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
+    <div class="container h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12 col-md-8 col-lg-6 col-xl-5">
           <div class="card bg-dark text-white" style="border-radius: 1rem;">
@@ -27,14 +27,14 @@
                 <h2 class="fw-bold mb-2 text-uppercase">Cadastro</h2>
                 <p class="text-white-50 mb-5">Crie sua conta!</p>
 
-                <div class="form-outline form-white mb-4">
-                  <input type="email" required id="typeEmailX" class="form-control gradient-custom form-control-lg" />
+                <div class="form-outline form-white mb-4 t">
+                  <input type="email" required id="typeEmailX" style="animation-delay:1s" class="form-control gradient-custom text-white form-control-lg" placeholder="usuario@hotmail.com" />
                   <label class="form-label" for="typeEmailX">Email</label>
                 </div>
 
                 <div class="form-outline form-white mb-4">
                   <div class="position-relative">
-                    <input type="password" id="typePasswordX" class="form-control gradient-custom form-control-lg" />
+                    <input type="password" id="typePasswordX" class="form-control gradient-custom text-white form-control-lg" placeholder="Usuario123" />
                     <div class="eye fs-4">
                       <i id="icon-eye" class="bi bi-eye"></i>
                     </div>
@@ -42,24 +42,24 @@
                   </div>
                 </div>
                 <div class="form-outline form-white mb-4">
-                  <input type="password" id="typeRepeatPasswordX" class="form-control gradient-custom form-control-lg" />
-
+                  <input type="password" id="typeRepeatPasswordX" style="animation-delay:-1s" class=" form-control gradient-custom text-white form-control-lg" placeholder="Usuario123" />
                   <label class="form-label" for="typeRepeatPasswordX">Repetir senha</label>
                 </div>
 
-                <button class="btn btn-outline-light btn-lg px-5" type="submit" onclick="createUser()">Cadastrar</button>
-              </div>
+                <button class="btn btn-outline-light btn-gradient btn-lg px-5" type="submit" onclick="createUser()">Cadastrar</button>
+                <div class="p-3">
+                  <span class="text-danger" id="error"></span>
+                </div>
+                <div>
+                  <p class="mb-5">Já tem conta? <a href="../login/login.html" class="text-white-50 fw-bold">Conecte-se</a>
+                  </p>
+                </div>
 
-              <div>
-                <p class="mb-0">Já tem conta? <a href="../login/login.html" class="text-white-50 fw-bold">Conecte-se</a>
-                </p>
               </div>
-
             </div>
           </div>
         </div>
       </div>
-    </div>
   </section>
 
   <!-- Toast -->

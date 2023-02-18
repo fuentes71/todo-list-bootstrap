@@ -34,6 +34,9 @@
 }
 .note {
   word-break: break-all;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  word-break: break-word;
   padding: 0 20px;
 }
 
@@ -71,39 +74,17 @@
   height: 50px;
   width: 50px;
 }
-.btn-gradient:hover {
-  background: #6a11cb !important;
 
-  background: -webkit-linear-gradient(
-    to right,
-    rgba(106, 17, 203, 1),
-    rgba(37, 117, 252, 1)
-  ) !important;
-  background: linear-gradient(
-    to right,
-    rgba(106, 17, 203, 1),
-    rgba(37, 117, 252, 1)
-  ) !important;
-  background-size: 350% 350% !important;
-  animation: colors 15s ease infinite !important
-;
+body {
+  display: block;
+  width: 100vw;
+  height: 100vh;
 }
-.gradient-custom {
-  background: #6a11cb !important;
-
-  background: -webkit-linear-gradient(
-    to right,
-    rgba(106, 17, 203, 1),
-    rgba(37, 117, 252, 1)
-  ) !important;
-  background: linear-gradient(
-    to right,
-    rgba(106, 17, 203, 1),
-    rgba(37, 117, 252, 1)
-  ) !important;
-  background-size: 350% 350% !important;
-  animation: colors 15s ease infinite !important
-;
+.gradient-custom,
+.btn-gradient:hover {
+  background: linear-gradient(45deg, #5e2d91, #6a11cb, #2575fc, #1055cc);
+  background-size: 300% 300%;
+  animation: colors 15s ease infinite;
 }
 
 @keyframes colors {
@@ -131,5 +112,12 @@
   }
   .i-user {
     right: 3rem;
+  }
+}
+
+@media (max-width: 500px) {
+  .content-buttons {
+    flex-direction: column;
+    padding: 0;
   }
 }
