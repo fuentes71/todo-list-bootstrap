@@ -23,7 +23,9 @@ const validateEmail = (email) => {
   );
 };
 const validatePassword = (password) => {
-  return password.match(/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,20}$/);
+  return password.match(
+    /^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%*()_+^&}{:;?.])(?:([0-9a-zA-Z])(?!\1)|[!@#$%;*(){}_+^&]){6,}$/
+  );
 };
 
 const feedBackToast = new bootstrap.Toast(feedBackToastEl);
@@ -48,10 +50,7 @@ password.addEventListener("keydown", () => {
   if (validatePassword(password.value)) validate.password = true;
   else validate.password = false;
 });
-repeatPassword.addEventListener("keyup", () => {
-  if (repeatPassword.value != password.value) validate.repeatPassword = false;
-  else validate.repeatPassword = true;
-});
+
 function errorInput(_error) {
   error.innerHTML = _error;
   setTimeout(() => {
@@ -63,22 +62,24 @@ function createUser() {
   if (valid) {
     return showFeedback(false, "E-mail já existente. Tente outro e-mail!");
   }
-  if (!validate.email) errorInput("Informe um email valido");
-  else if (!validate.password) errorInput("Digite uma senha valida!");
-  else if (!validate.repeatPassword) errorInput("Senhas diferentes!");
-  else {
-    listaUser.push({
-      email: email.value,
-      password: password.value,
-      todo: [],
-    });
-    saveLocalStorage("listaUser", listaUser);
-    loader.setAttribute("style", "display: flex !important");
-    setTimeout(() => {
-      window.location.href = "../login/login.html";
-    }, 1700);
-    return showFeedback(true, "Usuario cadastrado com sucesso");
+  if (!validate.email) return errorInput("Informe um email valido");
+  else if (!validate.password) return errorInput("Digite uma senha valida!");
+  else if (repeatPassword.value === password.value) {
+    return (validate.repeatPassword = true);
+  } else {
+    return errorInput("Senhas diferentes!");
   }
+  listaUser.push({
+    email: email.value,
+    password: password.value,
+    todo: [],
+  });
+  saveLocalStorage("listaUser", listaUser);
+  loader.setAttribute("style", "display: flex !important");
+  setTimeout(() => {
+    window.location.href = "../login/login.html";
+  }, 1700);
+  return showFeedback(true, "Usuario cadastrado com sucesso");
 }
 
 function showFeedback(success, msg) {
