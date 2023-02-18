@@ -65,7 +65,7 @@ function createUser() {
   if (!validate.email) return errorInput("Informe um email valido");
   else if (!validate.password) return errorInput("Digite uma senha valida!");
   else if (repeatPassword.value === password.value) {
-    return (validate.repeatPassword = true);
+    validate.repeatPassword = true;
   } else {
     return errorInput("Senhas diferentes!");
   }
